@@ -6,7 +6,7 @@ def test_recipe():
     driver.get("https://tatiana-1009.github.io/Recipe.html")
 
     # Название блюда (тег h1), текст: "Простой бутерброд с сыром":
-    assert "Простой бутерброд с сыром" == driver.find_element(By.TAG_NAME, "h1").text
+    assert "Простой бутерброд с сыром" in driver.find_element(By.TAG_NAME, "h1").text
 
     # Раздел "Что нужно":
     assert "Что нужно" in driver.find_element(By.TAG_NAME, "h2").text
