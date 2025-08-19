@@ -1,0 +1,60 @@
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import time
+from pytest_check import check
+
+PAGE_URL = "https://slqamsk.github.io/tmp/xPath02.html"
+
+
+def test_titles():
+    driver = webdriver.Chrome()
+    driver.get(PAGE_URL)
+    with check:
+        assert driver.title == "Пиццерия - Оформление заказа"
+        element = driver.find_element(By.XPATH, "//h1")
+    with check:
+        assert element.text == "Пиццерия \"Итальянский уголок\""
+    driver.quit()
+
+
+def test_base_menu():
+    driver = webdriver.Chrome()
+    driver.get(PAGE_URL)
+    with check:
+        assert driver.find_element(By.XPATH, "//h3[.='Маргарита']")
+    with check:
+        assert driver.find_element(By.XPATH, "//h3[.='Четыре сыра']")
+    with check:
+        assert driver.find_element(By.XPATH, "//h3[.='Вегетарианская']")
+    driver.quit()
+
+def test_pizza_of_the_day():
+    driver = webdriver.Chrome()
+    driver.get(PAGE_URL)
+    element = driver.find_element(By.XPATH, "//h3[contains(., '(пицца дня)')]")
+    with check:
+        assert '(пицца дня)' in element.text
+    with check:
+        assert 'Маргарита' not in element.text
+    with check:
+        assert 'Четыре сыра' not in element.text
+    with check:
+        assert 'Вегетарианская' not in element.text
+    driver.quit()
+
+def test_order_base_pizza():
+    driver = webdriver.Chrome()
+    driver.get(PAGE_URL)
+    driver.find_element(By.XPATH,"//h3[.='Маргарита']/parent::*/button").click()
+    driver.find_element(By.XPATH, "//h3[.='Четыре сыра']/parent::*/button").click()
+    driver.find_element(By.XPATH, "//h3[.='Вегетарианская']/parent::*/button").click()
+    time.sleep(5)
+
+    element = driver.find_element(By.XPATH, "//input[@id='customer-name']")
+    element.send_keys('Стрельцова Татьяна')
+    element = driver.find_element(By.XPATH, "//input[@id='customer-email']")
+    element.send_keys('Tanya@mail.ru')
+    time.sleep(5)
+    driver.find_element(By.XPATH, "//button[@id='place-order']").click()
+    time.sleep(5)
+    driver.quit()
