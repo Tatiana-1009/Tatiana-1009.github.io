@@ -11,8 +11,8 @@ def test_titles():
     driver.get(PAGE_URL)
     with check:
         assert driver.title == "Пиццерия - Оформление заказа"
-        element = driver.find_element(By.XPATH, "//h1")
     with check:
+        element = driver.find_element(By.XPATH, "//h1")
         assert element.text == "Пиццерия \"Итальянский уголок\""
     driver.quit()
 
