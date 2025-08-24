@@ -1,0 +1,16 @@
+class Animal:
+    def __init__(self, name, voice):
+        self.name = 'animal'
+        self.voice = 'voice'
+
+    @classmethod
+    def voice(cls):
+        print(self.name, self.voice)
+
+    cat = Animal('cat', 'мяу!')
+        def voice():
+            cat.print()
+
+    dog = Animal('dog', 'гав!')
+        def voice():
+            dog.print()
