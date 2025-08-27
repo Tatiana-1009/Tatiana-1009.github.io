@@ -1,0 +1,46 @@
+class Shape:
+    def __init__(self, size):
+        self.size = size
+
+    def resize(self, x):
+        if x >= 0:
+            self.size = self.size * x
+        else:
+            self.size = -self.size * x
+
+    def area(self):
+        return None
+
+    def perimetr(self):
+        return None
+
+a = Shape(4)
+print(f"Исходный размер: {a.size}")
+a.resize(-3)
+print(f"Новый размер: {a.size}, Площадь: {a.area()}, Периметр: {a.perimetr()}")
+
+class Square(Shape):
+
+    def area(self):
+        return self.size * self.size
+
+    def perimetr(self):
+        return self.size * 4
+
+b = Square(7)
+print(f"Исходный размер: {b.size}")
+b.resize(-2)
+print(f"Новый размер: {b.size}, Площадь: {b.area()}, Периметр: {b.perimetr()}")
+
+class Circle(Shape):
+
+    def area(self):
+        return 3.141592 * self.size * self.size
+
+    def perimetr(self):
+        return 2 * 3.141592 * self.size
+
+c = Circle(10)
+print(f"Исходный размер: {c.size}")
+c.resize(5)
+print(f"Новый размер: {c.size}, Площадь: {c.area()}, Периметр: {c.perimetr()}")
